@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+  
+    <h:head>
+        <title>Informacion Personal</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:outputLabel  value="Nombre:"  />
+            <h:panelGrid columns="4" cellpadding="5">
+                <p:inputText id="nombre" value="#{index.nombre}" />
+            </h:panelGrid>
+            <h:outputLabel  value="Apellido:" />
+            <h:panelGrid columns="4" cellpadding="4">
+                <p:inputText id="apellido" value="#{index.apellido}" />
+            </h:panelGrid>
+            <h:outputLabel  value="Cedúla:" />
+            <h:panelGrid columns="4" cellpadding="4">
+                <p:inputText id="cedula" value="#{index.cedula}" />
+            </h:panelGrid>
+            <h:outputLabel  value="Fecha de nacimiento:" />
+            <h:panelGrid columns="4" cellpadding="4">
+                <p:calendar id="mask" value="#{index.fechaNacimiento}" pattern="dd/MM/yyyy" mask="true" >
+                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy" />
+                </p:calendar>
+            </h:panelGrid>
+            <h:outputLabel  value="Idioma:" />
+            <h:panelGrid columns="4" cellpadding="4">
+                <p:selectManyCheckbox id="grid" value="#{index.idiomas}" layout="grid" columns="3" >
+                    <f:selectItem itemValue="ninguno" itemLabel="Ninguno" />
+                    <f:selectItem itemValue="ingles"  itemLabel="Ingles"  />
+                    <f:selectItem itemValue="mandarin" itemLabel="Mandarin"  />
+                    <f:selectItem itemValue="italiano" itemLabel="Italiano" /> 
+                    <f:selectItem itemValue="portugues" itemLabel="Portugues"  />
+                    <f:selectItem itemValue="arabe" itemLabel="Arabe"  />
+                </p:selectManyCheckbox>
+            </h:panelGrid>
+            <h:outputLabel  value="Nivel academico:" />
+            <h:panelGrid columns="4" cellpadding="4">
+                <p:selectOneMenu id="trl" value="#{index.nivelEstudios}" style="width:230px" >
+                    <f:selectItem itemLabel="Primaria" itemValue="primaria" />
+                    <f:selectItem itemLabel="Secundaria" itemValue="secundaria" />
+                    <f:selectItem itemLabel="Tecnico" itemValue="tecnico" />
+                    <f:selectItem itemLabel="Tecnologo" itemValue="tecnologo" />
+                    <f:selectItem itemLabel="Profesional" itemValue="profesional" />
+                    <f:selectItem itemLabel="Magister" itemValue="magister" />
+                </p:selectOneMenu>
+            </h:panelGrid>
+            <p:growl id="growl" life="2000" />
+            <p:commandButton value="Consultar" id="ajax" action="pago" style="margin-right:20px;" styleClass="ui-priority-primary" />
+
+        </h:form>
+    </h:body>
+</html>
+
