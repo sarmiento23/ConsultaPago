@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -23,7 +24,7 @@ public class Pago implements Serializable {
 
     @ManagedProperty("#{index}")
     private Index informacion;
-    
+
     private String nombre;
     private String apellido;
     private int cedula;
@@ -32,7 +33,8 @@ public class Pago implements Serializable {
     private ArrayList idiomas;
     private int pagoTotal;
     private int sueldoBase;
-    private int numeroIdiomas;
+    private int valorIdioma;
+    private int horasTrabajadas;
 
     public Pago() {
 
@@ -46,34 +48,68 @@ public class Pago implements Serializable {
         this.fechaNacimiento = informacion.getFechaNacimiento();
         this.idiomas = informacion.getIdiomas();
         this.nivelEstudios = informacion.getNivelEstudios();
-        this.numeroIdiomas= informacion.getIdiomas().size();
-        this.sueldoBase = 30000 *20;
+        this.horasTrabajadas = informacion.getHorasTrabajadas();
+        this.valorIdioma = 10000;
+        this.sueldoBase = 30000;
         this.pagoTotal = 0;
-//        hallarPagoTotal();
-        
+        totalSueldo();
     }
-    
-//    public int hallarPagoTotal(){
-//      switch (this.nivelEstudios) {
-//                case "tecnico":
-//                this.pagoTotal = 5000 + (10000 * this.numeroIdiomas)+ this.sueldoBase;
-//                break;
-//            case "tecnologo":
-//                this.pagoTotal = 15000 + (10000 * this.numeroIdiomas)+this.sueldoBase;
-//                break;
-//            case "profesional":
-//                this.pagoTotal = 30000 + (10000 * this.numeroIdiomas)+this.sueldoBase;
-//                break;
-//            case "magister":
-//                this.pagoTotal = 40000 + (10000 * this.numeroIdiomas)+this.sueldoBase;
-//                break;
-//            default:
-//                this.pagoTotal = 40000 + (10000 * this.numeroIdiomas)+this.sueldoBase;
-//                break;
-//        
-//       }
-//        return this.pagoTotal;
-//    }
+
+    /**
+     * Metodo que calcula cuanto dinero se debe sumar segun el nivel academico
+     *
+     * @return
+     */
+    private int totalNivelAcademico() {
+        int total;
+        switch (this.nivelEstudios) {
+            case "tecnico":
+                total = 5000;
+                break;
+            case "tecnologo":
+                total = 15000;
+                break;
+            case "profesional":
+                total = 30000;
+                break;
+            case "magister":
+                total = 40000;
+                break;
+            default:
+                total = 0;
+                break;
+        }
+
+        return total;
+    }
+
+    /**
+     * Metodo que calcula cuanto dinero se debe sumar segun la cantidad de
+     * idiomas
+     *
+     * @return
+     */
+    private int totalIdioma() {
+        int cantidadIdiomas, valorIdiomas;
+        cantidadIdiomas = this.idiomas.size();
+
+        valorIdiomas = valorIdioma * cantidadIdiomas;
+
+        return valorIdiomas;
+    }
+
+    /**
+     * Metodo que calcula el saldo total segun los datos
+     */
+    private void totalSueldo() {
+        int totalIdioma, totalNivel;
+
+        totalIdioma = totalIdioma();
+        totalNivel = totalNivelAcademico();
+
+        this.pagoTotal = (totalIdioma + totalNivel + this.sueldoBase) * this.horasTrabajadas;
+
+    }
 
     public Index getInformacion() {
         return informacion;
@@ -107,7 +143,6 @@ public class Pago implements Serializable {
         this.cedula = cedula;
     }
 
-    
     public String getNivelEstudios() {
         return nivelEstudios;
     }
@@ -140,14 +175,6 @@ public class Pago implements Serializable {
         this.sueldoBase = sueldoBase;
     }
 
-    public int getNumeroIdiomas() {
-        return numeroIdiomas;
-    }
-
-    public void setNumeroIdiomas(int numeroIdiomas) {
-        this.numeroIdiomas = numeroIdiomas;
-    }
-
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -155,6 +182,20 @@ public class Pago implements Serializable {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-    
-    
+
+    public int getHorasTrabajadas() {
+        return horasTrabajadas;
+    }
+
+    public void setHorasTrabajadas(int horasTrabajadas) {
+        this.horasTrabajadas = horasTrabajadas;
+    }
+
+    public int getValorIdioma() {
+        return valorIdioma;
+    }
+
+    public void setValorIdioma(int valorIdioma) {
+        this.valorIdioma = valorIdioma;
+    }
 }

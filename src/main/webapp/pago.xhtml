@@ -3,18 +3,49 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Pago</title>
     </h:head>
     <h:body>
-        <p:outputLabel value="#{pago.fechaNacimiento}"></p:outputLabel> <br></br>
-        <p:outputLabel value="#{pago.numeroIdiomas}"></p:outputLabel> <br></br>
-        <p:outputLabel value="#{pago.nivelEstudios}"></p:outputLabel> <br></br>
-        <p:outputLabel value="#{pago.pagoTotal}"></p:outputLabel> <br></br>
-        <ui:repeat var="item" value="#{pago.idiomas}"> 
-            <p:outputLabel value="#{item}"></p:outputLabel> <br></br>
-        </ui:repeat> 
+        <p:graphicImage url="resources/salario.png" width="24%" />
+        <p:panelGrid columns="2" >
+            <f:facet name="header" >
+                Datos 
+            </f:facet>
+
+            <h:outputLabel  value="Nombre:"  />
+            <p:outputLabel value="#{pago.nombre}"></p:outputLabel>
+
+            <h:outputLabel  value="Apellido:" />
+            <p:outputLabel value="#{pago.apellido}"></p:outputLabel>
+
+            <h:outputLabel  value="Cedúla:" />
+            <p:outputLabel value="#{pago.cedula}"></p:outputLabel>
+
+            <h:outputLabel  value="Fecha de nacimiento:" />
+            <p:outputLabel value="#{pago.fechaNacimiento}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" />
+            </p:outputLabel>
+
+            <h:outputLabel  value="Idioma:" />
+            <h:panelGrid columns="4" cellpadding="4">
+                <ui:repeat var="item" value="#{pago.idiomas}"> 
+                    <p:outputLabel value="#{item}"></p:outputLabel> <br></br>
+                </ui:repeat>
+            </h:panelGrid>
+
+            <h:outputLabel  value="Nivel academico:" />
+            <p:outputLabel value="#{pago.nivelEstudios}"></p:outputLabel>
+
+            <h:outputLabel  value="Numero horas trabajadas:" />
+            <p:outputLabel value="#{pago.horasTrabajadas}"></p:outputLabel>
+            
+            <h:outputLabel  value="Salario total:" />
+            <p:outputLabel value="#{pago.pagoTotal}"></p:outputLabel>
+
+        </p:panelGrid>
     </h:body>
 </html>
 

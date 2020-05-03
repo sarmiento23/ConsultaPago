@@ -33,6 +33,8 @@ public class Index implements Serializable{
     private ArrayList idiomas;
     private int numeroIdiomas;
     private String nivelEstudios;
+    private int horasTrabajadas;
+
     
     public Index() {
     }
@@ -93,5 +95,14 @@ public class Index implements Serializable{
     public void setNumeroIdiomas(int numeroIdiomas) {
         this.numeroIdiomas = numeroIdiomas;
     }
+    
+    public int getHorasTrabajadas() {
+        return horasTrabajadas;
+    }
+
+    public void setHorasTrabajadas(int horasTrabajadas) {
+        this.horasTrabajadas = horasTrabajadas;
+    }
+
    
 }
